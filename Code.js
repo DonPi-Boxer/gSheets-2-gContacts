@@ -41,7 +41,7 @@ function getContactsByMailAddress(mailAdress){
     return contacts;
   }
   else{
-    ui.prompt("contacts not found, it is " + contacts + " type is " + typeof(contacts));
+   // ui.prompt("contacts not found, it is " + contacts + " type is " + typeof(contacts));
     return undefined;
   }
 }
@@ -169,14 +169,14 @@ function importContacts() {
 }
 
 function createMergedContactGroupName(contactGroupsToAddArray){
-  ui.prompt("contact groups to add awway: " + contactGroupsToAddArray);
+ // ui.prompt("contact groups to add awway: " + contactGroupsToAddArray);
   var mergedContactGroupName = contactGroupsToAddArray[0];
   ui.alert("entering loop");
   for (let i = 1; i < contactGroupsToAddArray.length; i++){
     ui.alert("inside loop, merged name is " + mergedContactGroupName + " we add " + contactGroupsToAddArray[i]);
     mergedContactGroupName = mergedContactGroupName + " - " + contactGroupsToAddArray[i];  
   }
-  ui.prompt("merged contact group names equals " + mergedContactGroupName);
+ // ui.prompt("merged contact group names equals " + mergedContactGroupName);
   return mergedContactGroupName;
 }
 

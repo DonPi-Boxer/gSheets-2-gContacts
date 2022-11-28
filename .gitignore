@@ -3,3 +3,5 @@ package*
 import.js
 .venv/**
 .clasp*
+.claspignore
+kladblad.html
