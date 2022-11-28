@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function submitForm() {
+      google.script.run.appendRowFromFormSubmit(document.getElementById("feedbackForm"));
+      document.getElementById("form").style.display = "none";
+      document.getElementById("thanks").style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <div>
+  <div id="form">
+  <h1>Enter feedback</h1>
+  <form id="feedbackForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="feedback">Feedback</label>
+    <input type="text" id="feedback" name="feedback"><br><br>
+    <div>
+      <label for="rating">Are you satisfied?</label><br>
+      <input type="radio" id="yes" name="rating" value="Yes">
+      <label for="yes">Yes</label><br>
+      <input type="radio" id="no" name="rating" value="No">
+      <label for="no">No</label><br><br>
+      <input type="button" value="Submit feedback" onclick="submitForm();">
+  </form>
+  </div>
+  </div>
+  <div id="thanks" style="display: none;">
+    <p>Thank you for sumbitting feedback!</p>
+  </div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+         <table id="qc-table" class="qc-table">
+        <tr>
+          <td>
+            <button id="sheet-1" class="btn btn-primary btn-sm" onclick="google.script.run.setSheet1(<?=row?>,<?=col?>,<?=cell1?>);google.script.host.close();">Sheet 1</button></td>
+          <td class="profile-data"><p id="sheet-1-profile">Data from Sheet 1: <?=cell1?>   </p></td>
+        </tr>
+        <tr>
+          <td><button id="sheet-2" class="btn btn-secondary btn-sm" onclick="google.script.run.setSheet2(<?=row?>,<?=col?>,<?=cell2?>);google.script.host.close();">Sheet 2</button></td>
+          <td class="profile-data"><p id="sheet-2-profile">Data from Sheet 2: <?=cell2?>   </p></td>
+        </tr>
+      </table>
+  </body>
+</html>
+
+
+
+wat je doet:
+
+knip the contactGroups in het gedeelte dat wel al bestaat,. en het gedeelte dat nog niet bestaat
+
+Voor het gedeelte dat nig niet bestaat (vb CD3, CD4):
+
+--> create array CD1, CD2, CD3
+append array and create new rowgroup ONLY in this row
+
+--> create array CD1, CD@, CD3, CD4
+append array under previous array and create new rowgroup ONLY in this row
+
+--> append fullContactCredentials array under this rowgroup
+
+//Submenu 1: add a new contact group
+// NOTE: this only means the contact group is    added to the spreadsheet self, NOT to the Google contacts  (this only happens when updating contacts)
+ var subMenuShowDialogSidebar = ui.createMenu("Add contact")
+   .addItem("Add new contact", 'createSideBar("Index-add-contact.html", "Contact Details"))
+   ui.createMenu('Contacts')
+     //Reference submenu
+   .addSubMenu(subMenuShowDialogSidebar)
+   //  .addSeparator()
+   //  .addSubMenu(subMenuclear)  // Call submenu for updaten here
+   .addToUi()
+}
+
+
+
+    <h1 id="header">Hello World</h1>
+    <p id="testVarInput"> blablablablablablablablablablabl</p>
+        <td>
+            <button id="testVarInput" 
+            onclick="setJsVar(this.id)">test</button>
+        </td>
+    <p id="test">Greetings</p>        
+          <td>
+            <button id="test" 
+            onclick="changeInnerHTML(this.id, 'Bonjour')">test</button>
+        </td>
+
+
+
+
+        
+        
+
+
+
+
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <base target="_top">
+            <script>
+            function changeInnerHTML(buttonid, newValue) {
+                document.getElementById(buttonid).innerHTML = newValue;}
+            function setJsVar(buttonid){
+                var valueToPut = google.script.run(testVars)
+                changeInnerHTML(buttonid, valueToPut.toString());
+                } 
+             google.script.host.setHeight(400);      
+          </script>
+          </head>
+          <body>
+        
+             <h2 id="header_creds">Credentials</h2>
+        
+             <div class ="row"> 
+                <div class="column"><b>First name:</b></div>
+                <div class="column"><p id="cred_1"><?= cred_1 ?></p></div> 
+             </div>
+             <div class ="row">
+                <div class="column"><b> Last name: </b></div> 
+                <div class="column"><p id="cred_2"><?= cred_2 ?></p></div>            
+             </div>
+             <div class ="row">   
+                <div class="column"><b> Phone number:</b></div>         
+                <div class="column"><p id="cred_3"><?= cred_3 ?></p><div class="collumn"></div>  
+             </div>
+             <div class ="row">     
+                <div class="column"><b> E-mail: </b></div>
+                <div class="column"><p id="cred_4"><?= cred_4 ?></p></div>
+             </div> 
+                
+                   
+                  
+                  
+                 
+                </div>
+             </div>
+             <h2 id="header_cGroups">Contact groups</h1>
+             <div class="row">
+                <div class="column">
+                    <b> Organization type:  </b>
+                    <b> Organization: </b>   
+                    <b> Team: </b> 
+                    <b> Role: </b>
+                </div>        
+                <div class="column">
+                 <p id="cGroup_1"><?= cGroup_1 ?></p>   
+                 <p id="cGroup_2"><?= cGroup_2 ?></p> 
+                 <p id="cGroup_3"><?= cGroup_3 ?></p>   
+                 <p id="cGroup_4"><?= cGroup_4 ?></p>
+                </div>
+             </div>     
+           </body>
+        </html>
+        
+        
+        <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+
+<h3>Credentials</h3>
+
+<div class="row">
+  <div class="column">
+    <h2>Input type</h2>
+    <p>First Name</p>
+  </div>
+  <div class="column">
+    <h2>Give input</h2>
+    <p>Naam</p>
+  </div>
+</div>
+
+<h3>Contact groups</h3>
+
+<div class="row">
+  <div class="column">
+    <h2>Input type</h2>
+    <b> Organization type:  </b>
+    <b> Organization: </b>   
+    <b> Team: </b> 
+    <b> Role: </b>
+  </div>
+  <div class="column">
+    <h2>Given input</h2>
+    <p>Naam</p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+elem.innerHTML =  "<input type='text''value='' id=" + idToChange + "/></p>";\
+
+elem.innerHTML =  "<input type='text''value='' id=" + idToChange + "/></p>"; 
+
+
+
+function testConfirmSumbit(formObject){ 
+  var contactCredentialsConfirmation = getCredentialsOfFormObject(formObject);
+/*  var contactCredentialsInitial = testVars(); //Get from the original cached credentials
+  for (var i=0; i<contactCredentialsInitial.length(); i++){
+    if (contactCredentialsConfirmation[i]){
+        contactCredentialsInitial[i] = contactCredentialsConfirmation[i];
+  }  
+} */
+ui.prompt(contactCredentialsInitial);
+}
