@@ -1,0 +1,127 @@
+ 
+  <!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+      .column {
+      float: left;
+      width: 33.33%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+        
+        </style>
+    <base target="_top">
+    <script>
+  function changeButtonValue(idToChange) {
+    const elem = document.getElementById(idToChange);
+       if (elem.value == "Unchange") {       
+      elem.value= "Change"
+    }else {     
+      elem.value = "Unchange"
+    }      
+  } 
+  function submitConfirmationForm() {
+    // NOte that this google.script.run should run the function highest in hierarchy for adding the contact *\
+google.script.run
+.withSuccessHandler(google.script.host.close)
+.confirmSumbit(document.getElementById("confirm-contact"));  
+}
+
+  function changeInputField(idToChange, testLiteral) {
+    const elem = document.getElementById(idToChange);
+    
+    if (elem.innerHTML ==  testLiteral) {    
+    elem.innerHTML = "<input class='form-control form-control-sm' type='text' class='form-control' id=" + idToChange + " name='first_name'>";
+       }else
+    {
+      elem.innerHTML =testLiteral; 
+    }
+  
+          }
+
+
+  function changeOnClick(idToChangeButton, idToChangeText, testLiteral) {
+    changeButtonValue(idToChangeButton);
+    changeInputField(idToChangeText, testLiteral);
+  }
+
+  function setJsVar(idToChange){
+    var valueToPut = google.script.run(testVars)
+    changeInnerHTML(idToChange, valueToPut.toString());
+  } 
+    google.script.host.setHeight(600);
+    google.script.host.setWidth(600);    
+  function textToInput()  {   
+} 
+  </script>
+  </head>
+  <body>
+    <h2> Confirmation:
+    </h2>
+     <h3>Credentials</h3>
+     <form id="confirm-contact">
+     <div class="row">
+      <div class="column">
+          <p><b> First name:</b></p>
+          <p><b> Last name:</b></p> 
+          <p><b> Phone number:</b></p>
+          <p><b> E-mail:</b></p> 
+      </div> 
+      <div class="column">  
+          <p id="first_name"><?= cred_1 ?></p>   
+          <p id="last_name"><?= cred_2 ?></p>
+          <p id="phone_number"><?= cred_3 ?></p> 
+          <p id="email"><?= cred_4 ?></p>
+      </div>
+      <div class="column">
+      <p><input onclick='changeOnClick(this.id, "first_name", <?= cred_1 ?>)'
+      type ="button" value="Change" id="button_first_name"/></p>
+      <p><input onclick='changeOnClick(this.id, "last_name", <?= cred_2 ?>)'
+      type ="button" value="Change" id="button_last_name"/></p>
+      <p><input onclick='changeOnClick(this.id, "phone_number", <?= cred_3 ?>)'
+      type ="button" value="Change" id="butten_phone_number"/></p>
+      <p><input onclick='changeOnClick(this.id, "email", <?= cred_4 ?>)'
+      type ="button" value="Change" id="button_email"/></p>
+      </div>
+    </div>    
+          
+     <h3>Contact groups</h3>
+     <div class="row">
+      <div class="column">
+          <p><b> Organization type:</b></p>
+          <p><b> Organization name:</b></p> 
+          <p><b> Organization team:</b></p>
+          <p><b>Role in Team:</b></p>
+      </div>   
+      <div class="column">
+          <p id="cGroup_1"><?= cGroup_1 ?></p>   
+          <p id="cGroup_2"><?= cGroup_2 ?></p> 
+          <p id="cGroup_3"><?= cGroup_3 ?></p>   
+          <p id="cGroup_4"><?= cGroup_4 ?></p> 
+      </div>
+      <div class="column">
+      <p><input onclick='changeOnClick(this.id, "cGroup_1", <?= cGroup_1 ?>)'
+      type ="button" value="Change" id="button_cGroup_1" /></p> 
+      <p><input onclick='changeOnClick(this.id, "cGroup_2", <?= cGroup_2 ?>)'
+      type ="button" value="Change" id="button_cGroup_2"/></p>
+      <p><input onclick='changeOnClick(this.id, "cGroup_3", <?= cGroup_3 ?>)'
+      type ="button" value="Change" id="butten_CGroup_3"/></p>
+      <p><input onclick='changeOnClick(this.id, "cGroup_4", <?= cGroup_4 ?>)'
+      type ="button" value="Change" id="button_cGroup_4"/></p>       
+      </div>
+     </div>
+     <input type="Submit" value="confirm" id="submit"
+        onclick="submitConfirmationForm();">
+    </fieldset>
+   </body>
+</html>

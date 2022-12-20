@@ -1,0 +1,59 @@
+<script>
+
+//INCLUDE HTML PARTS, EG. JAVASCRIPT, CSS, OTHER HTML FILES
+function include(filename) {
+  return HtmlService.createHtmlOutputFromFile(filename).getContent();
+}
+  //Contact group tags function
+  (function () {
+    google.script.run.withSuccessHandler(buildTagListContactGroup).getAvailableTags(0);
+  })();
+
+  function buildTagListContactGroup(availableTags) {
+    $("#contact_group").autocomplete({
+      source: availableTags
+    });
+  }
+
+  // Sub group tages function
+  (function whatisthisfunction() {
+    google.script.run.withSuccessHandler(buildTagListSubGroup).getAvailableTags(1);
+  })();
+
+  function buildTagListSubGroup(availableTags) {
+    $("#sub_group").autocomplete({
+      source: availableTags
+    });
+  }
+
+  // Role tags function
+  (function whatisthisfunction2() {
+    google.script.run.withSuccessHandler(buildTagListRole).getAvailableTags(2);
+  })();
+
+  function buildTagListRole(availableTags) {
+    $("#role").autocomplete({
+      source: availableTags
+    });
+  }
+
+  // Prevent forms from submitting.
+  function preventFormSubmit() {
+    var forms = document.querySelectorAll('add-contact');
+
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function (event) {
+        event.preventDefault();
+      });
+    }
+  }
+
+  window.addEventListener('load', preventFormSubmit);
+
+
+
+  // Event handlers
+
+
+
+</script>
