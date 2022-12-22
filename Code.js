@@ -16,14 +16,13 @@ var firstNameIndex = 5;
 var emailIndex = 6;
 var mobileIndex = 7;
 var statusIndex = 8;
-var headerRows = 2;
+var headerRows = 5;
 
 var ui = SpreadsheetApp.getUi();
 
 // Sheet constants
 var sheet = SpreadsheetApp.getActiveSheet();
 var ss = SpreadsheetApp.getActiveSpreadsheet();
-var headerRows = 2;
 var numColsContacts = 7;
 var startColContacts = 1;
 var MaxRow = sheet.getLastRow();
@@ -82,10 +81,10 @@ function doesContactMailExist(mailAdress){
 // Underneath is all about importing the contact to google contacts
 function importContacts() {
   var dummy = ContactsApp.getContact("nigeljansen1996@live.nl");
-  //Get all the contact data, starting at row 4
+  //Get all the contact data, starting at row the row after headderrow
  var newContactCount = 0;
  var newContactGroupCount = 0;
-  for (var i=4; i<= sheet.getLastRow(); i++)  {
+  for (var i=headerRows + 1; i<= sheet.getLastRow(); i++)  {
     var rowmatrix= sheet.getRange(i, 1, 1, sheet.getLastColumn()).getValues();
     var row = rowmatrix[0];  
 
@@ -143,20 +142,20 @@ function importContacts() {
         //Create company type label
         if (companyTypeAdd != ""){
         let contactGroup = findOrCreateContactGroup(companyTypeAdd);
-        ui.alert("adding to contact group of only company type: " + companyTypeAdd);
+       // ui.alert("adding to contact group of only company type: " + companyTypeAdd);
         contactGroup.addContact(newContact);      
           //create companytype and team label
           if (teamAdd != ""){
             var contactGroupName = createMergedContactGroupName([companyTypeAdd, teamAdd]);
             contactGroup = findOrCreateContactGroup(contactGroupName);
-            ui.alert("adding to contact group of company type and team: " + contactGroupName);
+         //   ui.alert("adding to contact group of company type and team: " + contactGroupName);
             contactGroup.addContact(newContact);
             newContactGroupCount = newContactGroupCount + 1;
             //create company type, team and position label
             if (positionAdd != ""){
               contactGroupName = createMergedContactGroupName([companyTypeAdd, teamAdd, positionAdd]);
               contactGroup = findOrCreateContactGroup(contactGroupName);
-              ui.alert("adding to contact group of type, team and role: " + contactGroupName);
+           //   ui.alert("adding to contact group of type, team and role: " + contactGroupName);
               contactGroup.addContact(newContact);
               newContactGroupCount = newContactGroupCount + 1;
             }
@@ -165,15 +164,15 @@ function importContacts() {
       }
     }
   }
-  ui.alert("Added " + newContactCount + " new contacts and " + newContactGroupCount + " new contact groups");
+ // ui.alert("Added " + newContactCount + " new contacts and " + newContactGroupCount + " new contact groups");
 }
 
 function createMergedContactGroupName(contactGroupsToAddArray){
  // ui.prompt("contact groups to add awway: " + contactGroupsToAddArray);
   var mergedContactGroupName = contactGroupsToAddArray[0];
-  ui.alert("entering loop");
+ //ui.alert("entering loop");
   for (let i = 1; i < contactGroupsToAddArray.length; i++){
-    ui.alert("inside loop, merged name is " + mergedContactGroupName + " we add " + contactGroupsToAddArray[i]);
+   // ui.alert("inside loop, merged name is " + mergedContactGroupName + " we add " + contactGroupsToAddArray[i]);
     mergedContactGroupName = mergedContactGroupName + " - " + contactGroupsToAddArray[i];  
   }
  // ui.prompt("merged contact group names equals " + mergedContactGroupName);
@@ -350,8 +349,8 @@ function  findContactGroupRowPositionExtremes(contactGroupHeader, firstRowPositi
   var collumnsPositionsToSearchArray = [1,2,3,4];
   // For the 1st dimenstion, we want to search through the entire sheet, minus the headers
   
-  //The row where the first contactgroup is place
-  var firstRowPositionToSearch = 4;
+  //The row where the first contactgroup is placed; staart searching at headerrows + 1
+  var firstRowPositionToSearch = headerRows;
   //Last row that contains data
   var lastRowPositionToSearch = ss.getLastRow();
   

@@ -1,13 +1,11 @@
 {
   "timeZone": "Europe/Brussels",
   "dependencies": {
-    "enabledAdvancedServices": [
-      {
-        "userSymbol": "People",
-        "version": "v1",
-        "serviceId": "peopleapi"
-      }
-    ]
+    "enabledAdvancedServices": [{
+      "userSymbol": "People",
+      "serviceId": "peopleapi",
+      "version": "v1"
+    }]
   },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8"
